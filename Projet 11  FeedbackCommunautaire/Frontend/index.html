@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme de Feedback DECLIC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .status-item {
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Barre de navigation -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-comments text-2xl text-blue-300"></i>
+                    <h1
+                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-white">
+                        DECLIC Feedback
+                    </h1>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li>
+                            <a href="#" class="flex items-center space-x-1 hover:text-blue-200 transition-colors">
+                                <i class="fas fa-home"></i>
+                                <span>Accueil</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#signalement"
+                                class="flex items-center space-x-1 hover:text-blue-200 transition-colors">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Signalement</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-1 hover:text-blue-200 transition-colors">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Tableau de bord</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center space-x-1 hover:text-blue-200 transition-colors">
+                                <i class="fas fa-chart-pie"></i>
+                                <span>Statistiques</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="md:hidden text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4 leading-tight">
+                        Votre voix compte pour <span class="text-blue-600">améliorer</span> notre communauté
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Contribuez à améliorer l'accès et la qualité des services essentiels dans votre quartier.
+                        Ensemble, faisons la différence !
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#signalement"
+                            class="btn-primary text-white px-6 py-3 rounded-lg font-medium shadow-lg flex items-center">
+                            <i class="fas fa-plus-circle mr-2"></i> Faire un signalement
+                        </a>
+                        <a href="#"
+                            class="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors flex items-center">
+                            <i class="fas fa-chart-bar mr-2"></i> Voir les stats
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Citoyens engagés" class="rounded-xl shadow-2xl w-full max-w-md mx-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section signalement -->
+    <section id="signalement" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Faire un signalement</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden card">
+                <div class="p-1 gradient-bg"></div>
+                <div class="p-8">
+                    <form class="space-y-6">
+                        <!-- Étape 1: Service concerné -->
+                        <div>
+                            <label for="service" class="block text-lg font-medium text-gray-700 mb-2">
+                                <i class="fas fa-concierge-bell text-blue-500 mr-2"></i> Service concerné
+                            </label>
+                            <select id="service"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option disabled selected>Sélectionnez un service</option>
+                                <option>Santé</option>
+                                <option>Éducation</option>
+                                <option>Eau et assainissement</option>
+                                <option>Énergie</option>
+                                <option>Transport</option>
+                                <option>Sécurité</option>
+                                <option>Administration</option>
+                            </select>
+                        </div>
+
+                        <!-- Étape 2: Description du problème -->
+                        <div>
+                            <label for="description" class="block text-lg font-medium text-gray-700 mb-2">
+                                <i class="fas fa-comment-dots text-blue-500 mr-2"></i> Décrire le problème
+                            </label>
+                            <textarea id="description" rows="4"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                placeholder="Décrivez le problème en détail..."></textarea>
+                        </div>
+
+                        <!-- Étape 3: Localisation -->
+                        <div>
+                            <label for="lieu" class="block text-lg font-medium text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Localisation (quartier)
+                            </label>
+                            <input type="text" id="lieu"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                placeholder="Nom du quartier ou adresse">
+                        </div>
+
+                        <!-- Photo -->
+                        <div>
+                            <label class="block text-lg font-medium text-gray-700 mb-2">
+                                <i class="fas fa-camera text-blue-500 mr-2"></i> Ajouter des photos
+                            </label>
+                            <div
+                                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                                <div class="space-y-1 text-center">
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="photo"
+                                            class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                                            <span>Téléverser une image</span>
+                                            <input id="photo" name="photo" type="file" class="sr-only" multiple>
+                                        </label>
+                                        <p class="pl-1">ou glisser-déposer</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG jusqu'à 5MB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Types de problèmes -->
+                        <div>
+                            <label class="block text-lg font-medium text-gray-700 mb-2">
+                                <i class="fas fa-tags text-blue-500 mr-2"></i> Type de problème
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                <label
+                                    class="inline-flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="checkbox"
+                                        class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="ml-2">Panne</span>
+                                </label>
+                                <label
+                                    class="inline-flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="checkbox"
+                                        class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="ml-2">Manque</span>
+                                </label>
+                                <label
+                                    class="inline-flex items-center p-3 border border-gray-300 rounded-lg hover:bg-blue-50 cursor-pointer transition-colors">
+                                    <input type="checkbox"
+                                        class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                                    <span class="ml-2">Mauvaise qualité</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit"
+                                class="w-full btn-primary text-white px-6 py-3 rounded-lg font-bold text-lg shadow-lg flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-2"></i> Soumettre le signalement
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statuts -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Suivi des signalements</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Voici les différentes étapes par lesquelles passe votre signalement une fois soumis
+                </p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="status-item bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-inbox text-yellow-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Reçu</h3>
+                    <p class="text-gray-600">Votre signalement a été enregistré et sera traité dans les plus brefs
+                        délais.</p>
+                </div>
+
+                <div class="status-item bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">En cours</h3>
+                    <p class="text-gray-600">Le problème est en cours d'analyse et de traitement par nos équipes.</p>
+                </div>
+
+                <div class="status-item bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Résolu</h3>
+                    <p class="text-gray-600">Le problème a été résolu. Merci pour votre contribution !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Témoignages</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Ce que les citoyens disent de notre plateforme
+                </p>
+                <div class="w-20 h-1 bg-blue-600 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Corine D.</h4>
+                            <p class="text-sm text-gray-500">Quartier </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "Grâce à DECLIC, le problème d'eau dans notre quartier a été résolu en moins d'une semaine. Très
+                        efficace !"
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Mouhamed S.</h4>
+                            <p class="text-sm text-gray-500">Quartier Soucoupapaye</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "J'ai signalé un éclairage public défectueux et 48h après, c'était réparé. Bravo pour la
+                        réactivité."
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Assiatou D.</h4>
+                            <p class="text-sm text-gray-500">Quartier Tilene</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "L'application est simple à utiliser et on voit vraiment les résultats concrets. Je recommande à
+                        tous !"
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Prêt à faire la différence dans votre communauté ?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Rejoignez des milliers de citoyens engagés qui contribuent à améliorer les services publics.
+            </p>
+            <a href="#signalement"
+                class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-bold text-lg shadow-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-bullhorn mr-2"></i> Faire un signalement maintenant
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-comments text-blue-400 mr-2"></i> DECLIC
+                    </h3>
+                    <p class="text-gray-400">
+                        Plateforme citoyenne pour l'amélioration des services publics.
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accueil</a></li>
+                        <li><a href="#signalement" class="text-gray-400 hover:text-white transition-colors">Faire un
+                                signalement</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Tableau de bord</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Statistiques</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Santé</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Éducation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Eau et
+                                assainissement</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Transport</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> Colobane Immeuble Inna R-20 2em
+                            Etage
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone-alt mr-2 text-blue-400"></i> +221 33 991 22 00
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-2 text-blue-400"></i> declicsud@gmail.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 Association DECLIC. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
