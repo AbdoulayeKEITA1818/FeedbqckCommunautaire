@@ -1,13 +1,11 @@
+const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path');
 
-// Charger les variables d'environnement
 dotenv.config();
 
-// Importer les routes
 const signalementRoutes = require('./routes/signalementRoutes');
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const statistiqueRoutes = require('./routes/statistiqueRoutes');
@@ -15,42 +13,55 @@ const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes API
 app.use('/api/signalements', signalementRoutes);
 app.use('/api/utilisateurs', utilisateurRoutes);
 app.use('/api/statistiques', statistiqueRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Connexion à MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/declic_feedback', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log(' Connecté à MongoDB'))
-.catch(err => console.error(' Erreur de connexion MongoDB:', err));
+mongoose
+    .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/declic_feedback')
+    .then(() => console.log('Connecte a MongoDB'))
+    .catch((err) => console.error('Erreur de connexion MongoDB:', err));
 
-// Route de test
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'API DECLIC en ligne' });
 });
 
-// Gestion des erreurs 404
 app.use((req, res) => {
-    res.status(404).json({ message: 'Route non trouvée' });
+    res.status(404).json({ message: 'Route non trouvee' });
 });
 
-// Gestion des erreurs globales
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: 'Erreur serveur interne' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(` Serveur démarré sur le port ${PORT}`);
-});
+const configuredPort = Number.parseInt(process.env.PORT, 10);
+const PORT = Number.isNaN(configuredPort) ? 5000 : configuredPort;
+const MAX_PORT_RETRIES = 10;
+
+function startServer(port, remainingRetries = MAX_PORT_RETRIES) {
+    const server = http.createServer(app);
+
+    server.once('error', (error) => {
+        if (error.code === 'EADDRINUSE' && remainingRetries > 0) {
+            const nextPort = port + 1;
+            console.warn(`Le port ${port} est deja utilise. Nouvelle tentative sur le port ${nextPort}...`);
+            startServer(nextPort, remainingRetries - 1);
+            return;
+        }
+
+        console.error(`Impossible de demarrer le serveur sur le port ${port}:`, error.message);
+        process.exit(1);
+    });
+
+    server.listen(port, () => {
+        console.log(`Serveur demarre sur le port ${port}`);
+    });
+}
+
+startServer(PORT);
